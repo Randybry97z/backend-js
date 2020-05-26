@@ -1,9 +1,8 @@
-const http = require('http')
+const express = require('express')
+const app = express()
 
-function responsePetition (request, response) {
-	response.end('Hola babu')
-}
+app.get('/',function (req,res) {
+	res.send('Hola babu')
+})
 
-let server = http.createServer(responsePetition);
-
-server.listen(3000)
+app.listen(3000);
