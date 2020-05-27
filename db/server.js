@@ -6,10 +6,10 @@ const app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
 
-const sequelize = new Sequelize('proyecto-backend',null,null,{
-	dialect: 'sqlite',
-	storage: './proyecto-backend'
-});
+// const sequelize = new Sequelize('proyecto-backend',null,null,{
+// 	dialect: 'sqlite',
+// 	storage: './proyecto-backend'
+// });
 //let db = new sqlite3.Database('proyecto-backend')
 
 app.post('/pendientes', function (req,res) {
