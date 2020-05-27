@@ -8,6 +8,7 @@ const app = express()
 
 const tasksRoutes = require('./routes/tasks_routes')
 const registrationRoutes = require('./routes/registration_routes')
+const sessionRoutes = require('./routes/sessions_routes')
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
@@ -15,6 +16,7 @@ app.set('view engine', 'pug')
 
 app.use(tasksRoutes)
 app.use(registrationRoutes)
+app.use(sessionRoutes)
 
 // POST rute?_method=PUT
 

@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
   	}).then(user=>{
   		if (!user) return null
   		return user.authenticatePassword(password).then(valid=>{
-  			if (valid ? user : null)
+  			if (valid) return user
+  			return null
   		})
   	})
   }
@@ -35,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
 	  		res(valid)
 	  	})
   	})
-  };
+  }
   User.associate = function(models) {
     // associations can be defined here
   };
