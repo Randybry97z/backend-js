@@ -7,6 +7,6 @@ router.route('/tasks').get(TasksController.index).post(TasksController.create)
 
 router.get('/tasks/new',TasksController.new)
 
-router.route('/tasks/:id').get(TasksController.show)
+router.route('/tasks/:id').get(TasksController.show).put(TasksController.update)
 
 module.exports = router

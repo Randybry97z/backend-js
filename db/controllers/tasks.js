@@ -21,6 +21,15 @@ module.exports = {
 			res.json(err)
 		})
 	},
+	update: function (req,res) {
+		Task.update({description: req.body.description},{
+			where: {
+				id: req.params.id
+			}
+		}).then(function (response) {
+			res.redirect('/tasks/'+req.params.id)
+		})
+	},
 	new: function(req,res){
 		res.render('tasks/new')
 	}
