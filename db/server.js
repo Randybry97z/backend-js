@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 let db = new sqlite3.Database('proyecto-backend')
 
 app.post('/pendientes', function (req,res) {
-	db.run("INSERT INTO tasks(description) VALUES('Hola mundo')")
+	db.run(`INSERT INTO tasks(description) VALUES('?')`,req.body.description)
 	res.send("Consulta lista")
 })
 
