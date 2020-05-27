@@ -7,12 +7,14 @@ const methodOverride = require('method-override')
 const app = express()
 
 const tasksRoutes = require('./routes/tasks_routes')
+const registrationRoutes = require('./routes/registration_routes')
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 app.set('view engine', 'pug')
 
 app.use(tasksRoutes)
+app.use(registrationRoutes)
 
 // POST rute?_method=PUT
 
