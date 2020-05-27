@@ -4,6 +4,8 @@ const bodyParser = require('body-parser')
 const Sequelize = require('sequelize')
 const app = express()
 
+const tasks = require('./controllers/tasks')
+
 app.use(bodyParser.urlencoded({extended: true}))
 
 // const sequelize = new Sequelize('proyecto-backend',null,null,{
@@ -12,7 +14,9 @@ app.use(bodyParser.urlencoded({extended: true}))
 // });
 //let db = new sqlite3.Database('proyecto-backend')
 
-app.use('view engine', 'pug')
+app.set('view engine', 'pug')
+
+app.get('/tasks', tasks.home)
 
 app.post('/pendientes', function (req,res) {
 	// db.run(`INSERT INTO tasks(description) VALUES('?')`,req.body.description)
