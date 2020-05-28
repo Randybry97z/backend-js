@@ -5,10 +5,16 @@ module.exports = {
 		res.render('sessions/new')
 	},
 	create: function (req,res) {
-		User.login(req.body.email, req.body.password).then(user => res.json(user))
-												.catch(err => {
-													console.log(err)
-													res.json(err)
-												})
+		User.login(req.body.email, req.body.password)
+			.then(user => {
+				if(user){
+					req.session.userId = user.id
+				}
+				res.json(user)
+			})
+			.catch(err => {
+				console.log(err)
+				res.json(err)
+			})
 	}
 }

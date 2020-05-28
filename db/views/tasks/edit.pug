@@ -1,7 +1,7 @@
 doctype html
 html
 	head
-		title Tasks
+		title Editar tarea
 	body
 		form(action=`/tasks/${task.id}?_method=PUT` method="POST")
 			textarea(name="description" placeholder="Coloca la tarea a realizar")= task.description

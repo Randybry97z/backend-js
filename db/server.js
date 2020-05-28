@@ -3,6 +3,7 @@ const sqlite3 = require('sqlite3')
 const bodyParser = require('body-parser')
 const Sequelize = require('sequelize')
 const methodOverride = require('method-override')
+const session = require('express-session')
 
 const app = express()
 
@@ -10,14 +11,27 @@ const tasksRoutes = require('./routes/tasks_routes')
 const registrationRoutes = require('./routes/registration_routes')
 const sessionRoutes = require('./routes/sessions_routes')
 
+const findUserMiddleware = require('./middlewares/find_user')
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 app.set('view engine', 'pug')
+
+app.use(session({
+	secret: ['2312njwenrwjerw','12312ewdwifjsdfsd'],
+	saveUninitialized: false,
+	resave: false
+}))
+
+app.use(findUserMiddleware)
 
 app.use(tasksRoutes)
 app.use(registrationRoutes)
 app.use(sessionRoutes)
 
+app.get('/', function (req,res) {
+	res.render('home', {user: req.user})
+})
 // POST rute?_method=PUT
 
 app.listen(3000)
