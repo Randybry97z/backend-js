@@ -16,5 +16,10 @@ module.exports = {
 				console.log(err)
 				res.json(err)
 			})
+	},
+	destroy: function (req,res) {
+		req.session.destroy(function () {
+			res.redirect('/sessions')
+		})
 	}
 }
