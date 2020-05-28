@@ -10,6 +10,8 @@ const app = express()
 const tasksRoutes = require('./routes/tasks_routes')
 const registrationRoutes = require('./routes/registration_routes')
 const sessionRoutes = require('./routes/sessions_routes')
+const categoriesRoutes = require('./routes/categories_routes')
+
 
 const findUserMiddleware = require('./middlewares/find_user')
 const authUserMiddleware = require('./middlewares/auth_user')
@@ -30,6 +32,7 @@ app.use(authUserMiddleware)
 app.use(tasksRoutes)
 app.use(registrationRoutes)
 app.use(sessionRoutes)
+app.use(categoriesRoutes)
 
 app.get('/', function (req,res) {
 	res.render('home', {user: req.user})

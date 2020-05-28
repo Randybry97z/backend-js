@@ -1,0 +1,9 @@
+doctype html
+html
+	head
+		title Editar tarea
+	body
+		form(action=`/categories/${category.id}?_method=PUT` method="POST")
+			input(type="text" name="title" placeholder="Coloca la tarea a realizar")= category.description
+			input(type="text" name="color" placeholder="Coloca el color")= category.color
+			input(type="submit" value="Guardar")
