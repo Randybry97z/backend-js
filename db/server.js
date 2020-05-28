@@ -12,6 +12,7 @@ const registrationRoutes = require('./routes/registration_routes')
 const sessionRoutes = require('./routes/sessions_routes')
 
 const findUserMiddleware = require('./middlewares/find_user')
+const authUserMiddleware = require('./middlewares/auth_user')
 
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
@@ -24,6 +25,7 @@ app.use(session({
 }))
 
 app.use(findUserMiddleware)
+app.use(authUserMiddleware)
 
 app.use(tasksRoutes)
 app.use(registrationRoutes)
