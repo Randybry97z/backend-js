@@ -4,5 +4,6 @@ html
 		title Editar tarea
 	body
 		form(action=`/tasks/${task.id}?_method=PUT` method="POST")
+			input(type="text" name="categories" placeholder="ID de categorias separados por coma")
 			textarea(name="description" placeholder="Coloca la tarea a realizar")= task.description
 			input(type="submit" value="Guardar")

@@ -7,7 +7,11 @@ module.exports = {
 		})
 	},
 	show: function (req,res) {
-		Category.findByPk(req.params.id).then(function (category) {
+		Category.findByPk(req.params.id, {
+			include: [
+				'tasks'
+			]
+		}).then(function (category) {
 			res.render('categories/show', {category})
 		})
 	},

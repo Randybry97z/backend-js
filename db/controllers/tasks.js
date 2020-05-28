@@ -9,10 +9,13 @@ module.exports = {
 	},
 	show: function (req,res) {
 		Task.findByPk(req.params.id,{
-			include: [{
-				model: User,
-				as: 'user'
-			}]
+			include: [
+				{
+					model: User,
+					as: 'user'
+				},
+				'categories'
+			]
 		}).then(function (task) {
 			res.render('tasks/show', {task})
 		})
@@ -36,6 +39,10 @@ module.exports = {
 			description: req.body.description,
 			userId: req.user.id
 		}).then(result=>{
+			let categoriesId = req.body.categories.split(",")
+			task.addCategories(categoriesId).then(()=>{
+				res.redirect('/tasks')
+			})
 			res.json(result)
 		}).catch(err=>{
 			console.log(err)
@@ -43,13 +50,15 @@ module.exports = {
 		})
 	},
 	update: function (req,res) {
-		Task.update({description: req.body.description},{
-			where: {
-				id: req.params.id
-			}
-		}).then(function (response) {
-			res.redirect('/tasks/'+req.params.id)
-		})
+		let task = Task.findByPk(req.params.id).then(task => {
+          task.description = req.body.description;
+          task.save().then(()=>{
+            let categoryIds = req.body.categories.split(",");
+            task.addCategories(categoryIds).then(()=>{
+                res.redirect('/tasks/'+req.params.id);
+            });
+          });
+      });
 	},
 	new: function(req,res){
 		res.render('tasks/new')
