@@ -4,5 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT
   }, {});
 
+  Task.associate = function (models) {
+  	Task.belongsTo(models.User,{
+  		as: 'user'
+  	})
+  }
   return Task;
 };
