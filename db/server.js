@@ -5,6 +5,7 @@ const Sequelize = require('sequelize')
 const methodOverride = require('method-override')
 const session = require('express-session')
 
+const socketio = require('socket.io');
 const app = express()
 
 const tasksRoutes = require('./routes/tasks_routes')
@@ -39,8 +40,21 @@ app.get('/', function (req,res) {
 })
 // POST rute?_method=PUT
 
-app.listen(3000)
+let server = app.listen(3000)
 
+let io = socketio(server)
+
+let usersCount = 0;
+io.on('connection', function (socket) {
+	usersCount++
+
+	io.emit('count_updated',{count: usersCount})
+
+	socket.on('disconnect', function () {
+		usersCount--
+		io.emit('count_updated',{count: usersCount})
+	})
+})
 /*const sequelize = new Sequelize('proyecto-backend',null,null,{
 	dialect: 'sqlite',
 	storage: './proyecto-backend'
